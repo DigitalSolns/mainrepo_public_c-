@@ -5,7 +5,6 @@ int main() {
 
   // declare an int pointer
   int* pointInt;
-  int* vptr;
 
   // declare a float pointer
   float* pointFloat;

@@ -1,0 +1,37 @@
+name: Coverity Scan
+
+on:
+  push:
+    branches:
+      - main  # Adjust the branch name as needed
+
+jobs:
+  coverity-scan:
+    runs-on: ubuntu-latest  # Choose the appropriate runner for your project
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Set up Coverity Scan
+      run: |
+        curl -s 'https://scan.coverity.com/scripts/travisci_build_coverity_scan.sh' | bash || true
+        echo "Coverity Scan setup complete."
+
+    - name: Build
+      run: |
+        # Replace with your build commands
+        make
+
+    - name: Run Coverity Scan
+      run: |
+        # Replace with your Coverity Scan command
+        cov-build --dir cov-int make
+        tar czvf coverity-scan.tgz cov-int
+        echo "Coverity Scan complete."
+
+    - name: Upload Scan Results
+      uses: actions/upload-artifact@v2
+      with:
+        name: coverity-scan-results
+        path: coverity-scan.tgz

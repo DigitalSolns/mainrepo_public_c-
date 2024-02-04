@@ -8,6 +8,7 @@ int main() {
   int* vptr;
 
   // declare a float pointer
+  //a ptr
   float* pointFloat;
 
   // dynamically allocate memory
